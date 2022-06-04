@@ -4,15 +4,24 @@ on:
   pull_request:
     branches:
       - develop
+      - master
   push:
     branches:
       - develop
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{runner.os}}-node-${{hashFiles('**/package.json')}}
+          restore-keys: |
+            ${{runner.os}}-node-
       - name: Use NodeJs
         uses: actions/setup-node@v1
         with:
@@ -22,9 +31,25 @@ jobs:
       - run: npm run test -- --coverage
         env:
           CI: true
+      - name: Upload Test coverage
+        uses: actions/upload-artifact@v1
+        with:
+          name: code-coverage
+          path: coverage
       - name: Build Project
         if: github.event_name == 'push'
         run: npm run build
+      - name: Upload Build Folder
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: build
+      - name: Create Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain https://blackcalb.surge.sh
