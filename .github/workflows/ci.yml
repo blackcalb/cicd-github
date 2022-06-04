@@ -42,7 +42,7 @@ jobs:
         with:
           name: build
           path: build
-      - uses: actions/download-artifact
+      # - uses: actions/download-artifact
       - name: Deploy to staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain https://blackcalb.surge.sh
