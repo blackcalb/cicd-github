@@ -1,0 +1,29 @@
+name: Shell Commands
+
+on: [push]
+
+jobs:
+  run-shell-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print using batch cmd
+        run: echo 'Hello World'
+      - name: Multiline script
+        run: |
+          node -v
+          npm -v
+      - name: Using Python's shell
+        run: |
+          import plataform
+          print(plataform.processor())
+        shell: python
+
+  run-windows-commands:
+    runs-on: windows-latest
+    needs: ['run-shell-commands']
+    steps:
+      - name: Directory on PowerShell
+        run: Get-Location
+      - name: Directory on bash
+        run: pwd
+        shell: bash
