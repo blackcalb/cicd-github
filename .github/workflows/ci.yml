@@ -72,6 +72,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+          ref: master
       - name: SonarCloud Scan
         if: github.ref == 'refs/heads/master'
         uses: SonarSource/sonarcloud-github-action@master
