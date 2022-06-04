@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - develop
+      - master
 
 jobs:
   build:
@@ -44,7 +45,11 @@ jobs:
         with:
           name: build
           path: build
-      # - uses: actions/download-artifact
+      - name: Create Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain https://blackcalb.surge.sh
