@@ -15,11 +15,13 @@ jobs:
         env:
           STEP_ENV: Avaible only in this step
         run: |
+          echo "ENCRYP_SECRET: ${{secrets.ENCRYPTED_SECRET}}"
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
       - name: Log env var 2
         run: |
+          echo "ENCRYP_SECRET: ${{secrets.ENCRYPTED_SECRET}}"
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
@@ -38,6 +40,7 @@ jobs:
           echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF: ${GITHUB_REF}"
+          echo "ENCRYP_SECRET: ${{secrets.ENCRYPTED_SECRET}}"
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
