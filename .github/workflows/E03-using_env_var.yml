@@ -27,8 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Log env var
-        env:
-          STEP_ENV: Avaible only in this step
         run: |
           echo "HOME: ${HOME}"
           echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
