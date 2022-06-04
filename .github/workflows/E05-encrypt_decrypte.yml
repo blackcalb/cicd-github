@@ -2,9 +2,9 @@
 name: Decrypt files
 
 on:
-  push:
-    branches:
-      - feature/*
+  pull_request:
+    types:
+      - closed
 
 jobs:
   decrypt-file:

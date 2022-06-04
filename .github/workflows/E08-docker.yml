@@ -1,5 +1,8 @@
 name: Container
-on: push
+on:
+  pull_request:
+    types:
+      - closed
 
 jobs:
   docker-steps:

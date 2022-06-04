@@ -1,9 +1,9 @@
 name: Env Variables
 
 on:
-  push:
-    branches:
-      - feature/*
+  pull_request:
+    types:
+      - closed
 
 env:
   WF_ENV: Available to all jobs

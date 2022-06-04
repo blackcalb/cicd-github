@@ -2,9 +2,9 @@
 name: Some actions with auth
 
 on:
-  push:
-    branches:
-      - feature/*
+  pull_request:
+    types:
+      - closed
 
 jobs:
   Create-an-issue-example:

@@ -1,17 +1,17 @@
 name: 'Actions workflow'
 
+# on:
+# we can schedule some wf to run periodically.
+# must be at least 5 min between each iteration
+# schedule:
+#   - cron: '0 0 * * *'
+# push:
+#   branches:
+#     - develop
 on:
-  # we can schedule some wf to run periodically.
-  # must be at least 5 min between each iteration
-  # schedule:
-  #   - cron: '0 0 * * *'
-  # push:
-  #   branches:
-  #     - develop
-  push:
-    branches:
-      - feature/*
-
+  pull_request:
+    types:
+      - closed
 jobs:
   run-github-action:
     runs-on: ubuntu-latest
