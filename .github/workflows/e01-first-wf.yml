@@ -14,8 +14,7 @@ jobs:
           npm -v
       - name: Using Python's shell
         run: |
-          import plataform
-          print(plataform.processor())
+          print("Hello world from python")
         shell: python
 
   run-windows-commands:
