@@ -1,0 +1,45 @@
+name: 'Actions workflow'
+
+# on:
+# we can schedule some wf to run periodically.
+# must be at least 5 min between each iteration
+# schedule:
+#   - cron: '0 0 * * *'
+# push:
+#   branches:
+#     - develop
+on:
+  pull_request:
+    types:
+      - closed
+jobs:
+  run-github-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show some global settings
+        run: |
+          echo $GITHUB_RUN_NUMBER
+          echo $GITHUB_EVENT_NAME
+          echo $GITHUB_EVENT_PATH
+          echo $GITHUB_WORKFLOW
+          echo $GITHUB_ACTION
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKFLOW
+      # - name: Cloning and switching branche
+      #   run: |
+      #     git clone git@github:$GITHUB_REPOSITORY
+      #     git checkout $GITHUB_REPOSITORY
+      - name: Checkout using Actions
+        uses: actions/checkout@v1
+      - name: List Files After Checkout
+        run: |
+          pwd
+          ls -all
+      - name: Simple JS Action
+        id: greet
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: John
+      - name: Log Greeting Time
+        run: echo "${{ steps.greet.outputs.time }}"

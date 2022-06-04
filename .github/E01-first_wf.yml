@@ -1,0 +1,37 @@
+# identifier of your wf
+name: Shell Commands
+
+# when this wf should run
+# on: [push]  // limit this wf to only trigger when a pull request is closed, to avoid spam
+on:
+  pull_request:
+    types:
+      - closed
+
+# what wf will execute
+jobs:
+  run-shell-commands:
+    # where will run the steps below
+    runs-on: ubuntu-latest
+    # what are all steps that will be execute
+    steps:
+      - name: Print using batch cmd
+        run: echo 'Hello World'
+      - name: Multiline script
+        run: |
+          node -v
+          npm -v
+      - name: Using Python's shell
+        run: |
+          print("Hello world from python")
+        shell: python
+
+  run-windows-commands:
+    runs-on: windows-latest
+    needs: ['run-shell-commands']
+    steps:
+      - name: Directory on PowerShell
+        run: Get-Location
+      - name: Directory on bash
+        run: pwd
+        shell: bash

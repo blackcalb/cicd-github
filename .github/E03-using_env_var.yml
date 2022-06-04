@@ -1,0 +1,49 @@
+name: Env Variables
+
+on:
+  pull_request:
+    types:
+      - closed
+
+env:
+  WF_ENV: Available to all jobs
+
+jobs:
+  log-evn:
+    runs-on: ubuntu-latest
+    env:
+      JOB_ENV: Only available to this job
+    steps:
+      - name: Log env var
+        env:
+          STEP_ENV: Avaible only in this step
+        run: |
+          echo "ENCRYP_SECRET: ${{secrets.ENCRYPTED_SECRET}}"
+          echo "WF_ENV: ${WF_ENV}"
+          echo "JOB_ENV: ${JOB_ENV}"
+          echo "STEP_ENV: ${STEP_ENV}"
+      - name: Log env var 2
+        run: |
+          echo "ENCRYP_SECRET: ${{secrets.ENCRYPTED_SECRET}}"
+          echo "WF_ENV: ${WF_ENV}"
+          echo "JOB_ENV: ${JOB_ENV}"
+          echo "STEP_ENV: ${STEP_ENV}"
+  log-default-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log env var
+        run: |
+          echo "HOME: ${HOME}"
+          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
+          echo "GITHUB_ACTION: ${GITHUB_ACTION}"
+          echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
+          echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
+          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+          echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
+          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
+          echo "GITHUB_SHA: ${GITHUB_SHA}"
+          echo "GITHUB_REF: ${GITHUB_REF}"
+          echo "ENCRYP_SECRET: ${{secrets.ENCRYPTED_SECRET}}"
+          echo "WF_ENV: ${WF_ENV}"
+          echo "JOB_ENV: ${JOB_ENV}"
+          echo "STEP_ENV: ${STEP_ENV}"
