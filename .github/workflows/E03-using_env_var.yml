@@ -1,6 +1,9 @@
 name: Env Variables
 
-on: push
+on:
+  push:
+    branches:
+      - feature/*
 
 env:
   WF_ENV: Available to all jobs

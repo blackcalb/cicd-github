@@ -5,9 +5,12 @@ on:
   # must be at least 5 min between each iteration
   # schedule:
   #   - cron: '0 0 * * *'
+  # push:
+  #   branches:
+  #     - develop
   push:
     branches:
-      - develop
+      - feature/*
 
 jobs:
   run-github-action:
