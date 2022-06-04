@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+        with:
+          ref: develop
+      - name: Decrypt
         env:
           PASSPHRASE: ${{ secrets.SENSITIVE_INFO_PASS }}
-      - name: Decrypt
         run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/sensitive_info.json sensitive_info.json.gpg
       - name: Print our file content
         run: cat $HOME/sensitive_info.json
