@@ -1,10 +1,19 @@
+# identifier of your wf
 name: Shell Commands
 
-on: [push]
+# when this wf should run
+# on: [push]  // limit this wf to only trigger when a pull request is closed, to avoid spam
+on:
+  pull_request:
+    types:
+      - closed
 
+# what wf will execute
 jobs:
   run-shell-commands:
+    # where will run the steps below
     runs-on: ubuntu-latest
+    # what are all steps that will be execute
     steps:
       - name: Print using batch cmd
         run: echo 'Hello World'
