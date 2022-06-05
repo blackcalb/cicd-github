@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# echo =========
+# echo "Commit message: $1"
+# echo =========
+npx commitlint --edit 
